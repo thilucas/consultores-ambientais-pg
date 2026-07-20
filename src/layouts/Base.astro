@@ -14,7 +14,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
 ---
 
 <!doctype html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="sem-js">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -32,6 +32,15 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta property="og:site_name" content="Associação dos Consultores Ambientais de Ponta Grossa" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="generator" content={Astro.generator} />
+    <script is:inline>
+      // Esconde os elementos que serão revelados no scroll. Se por qualquer
+      // motivo o script de revelação não rodar, a trava abaixo devolve o
+      // conteúdo — nunca deixamos a página em branco por causa da animação.
+      document.documentElement.classList.remove('sem-js');
+      window.__travaReveal = setTimeout(function () {
+        document.documentElement.classList.add('sem-js');
+      }, 2500);
+    </script>
   </head>
   <body>
     <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
@@ -69,6 +78,63 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
         </div>
       </div>
     </footer>
+    <script is:inline>
+      (function () {
+        clearTimeout(window.__travaReveal);
+        try {
+        var reduzido = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var alvos = document.querySelectorAll('.reveal');
+
+        if (reduzido || !('IntersectionObserver' in window)) {
+          alvos.forEach(function (el) {
+            el.classList.add('is-visible');
+          });
+        } else {
+          var observador = new IntersectionObserver(
+            function (entradas) {
+              entradas.forEach(function (entrada) {
+                if (!entrada.isIntersecting) return;
+                var el = entrada.target;
+                el.classList.add('is-visible');
+                observador.unobserve(el);
+                el.addEventListener(
+                  'transitionend',
+                  function () {
+                    el.classList.add('is-done');
+                  },
+                  { once: true }
+                );
+              });
+            },
+            // Dispara um pouco antes do elemento encostar na borda inferior
+            { threshold: 0.1, rootMargin: '0px 0px -8% 0px' }
+          );
+
+          alvos.forEach(function (el) {
+            // Já visível no carregamento (hero): revela sem esperar scroll
+            if (el.getBoundingClientRect().top < window.innerHeight * 0.9) {
+              el.classList.add('is-visible');
+            } else {
+              observador.observe(el);
+            }
+          });
+        }
+
+        // Cabeçalho ganha sombra assim que a página sai do topo
+        var cabecalho = document.querySelector('.site-header');
+        if (cabecalho) {
+          var marcar = function () {
+            cabecalho.classList.toggle('rolado', window.scrollY > 8);
+          };
+          marcar();
+          window.addEventListener('scroll', marcar, { passive: true });
+        }
+        } catch (e) {
+          // Qualquer falha: devolve o conteúdo sem animação.
+          document.documentElement.classList.add('sem-js');
+        }
+      })();
+    </script>
   </body>
 </html>
 
@@ -79,7 +145,15 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     z-index: 50;
     background: color-mix(in srgb, var(--paper) 92%, transparent);
     backdrop-filter: blur(8px);
-    border-bottom: 1px solid var(--paper-2);
+    border-bottom: 1px solid transparent;
+    transition:
+      border-color 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+
+  .site-header.rolado {
+    border-bottom-color: var(--paper-2);
+    box-shadow: 0 6px 24px -18px rgba(18, 46, 30, 0.7);
   }
 
   .header-inner {

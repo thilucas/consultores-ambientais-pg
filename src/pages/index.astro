@@ -51,21 +51,21 @@ const atuacao = [
   <section class="hero" aria-labelledby="titulo-hero">
     <div class="container hero-grid">
       <div class="hero-texto">
-        <p class="eyebrow">Ponta Grossa – PR · fundada em 10/12/2025</p>
-        <h1 id="titulo-hero">
+        <p class="eyebrow reveal" style="--i:0">Ponta Grossa – PR · fundada em 10/12/2025</p>
+        <h1 id="titulo-hero" class="reveal" style="--i:1">
           Empresas <em>conectadas</em>, ambiente <em>preservado</em>, Ponta&nbsp;Grossa <em>protegida</em>.
         </h1>
-        <p class="hero-sub">
+        <p class="hero-sub reveal" style="--i:2">
           Somos a associação que reúne consultores e empresas de gestão ambiental dos Campos
           Gerais para fortalecer o setor, padronizar práticas e promover o desenvolvimento
           sustentável.
         </p>
-        <div class="hero-acoes">
+        <div class="hero-acoes reveal" style="--i:3">
           <a class="btn btn-solid" href="#empresas">Conheça as empresas</a>
           <a class="btn btn-ghost" href="#contato">Fale conosco</a>
         </div>
       </div>
-      <div class="hero-logo">
+      <div class="hero-logo reveal" style="--i:2">
         <Image src={logo} alt="Logotipo da Associação dos Consultores Ambientais de Ponta Grossa: araucária, folhas, rio e cidade dentro de um círculo" width={480} loading="eager" />
       </div>
     </div>
@@ -76,10 +76,10 @@ const atuacao = [
   <!-- ===================== SOBRE ===================== -->
   <section id="sobre" aria-labelledby="titulo-sobre">
     <div class="container">
-      <p class="eyebrow">Sobre a Associação</p>
-      <h2 id="titulo-sobre" class="section-title">Uma classe organizada em torno do meio ambiente</h2>
+      <p class="eyebrow reveal" style="--i:0">Sobre a Associação</p>
+      <h2 id="titulo-sobre" class="section-title reveal" style="--i:1">Uma classe organizada em torno do meio ambiente</h2>
       <div class="sobre-grid">
-        <div class="sobre-texto">
+        <div class="sobre-texto reveal reveal-soft" style="--i:2">
           <p>
             O associativismo em gestão ambiental une profissionais e empresas para fortalecer o
             setor, padronizar práticas e influenciar políticas públicas. Em Ponta Grossa, a
@@ -96,7 +96,7 @@ const atuacao = [
           </ul>
         </div>
         <div class="sobre-cartoes">
-          <article class="cartao">
+          <article class="cartao reveal" style="--i:3">
             <h3>Missão</h3>
             <p>
               Representar, fortalecer e valorizar a classe profissional, promovendo excelência
@@ -105,7 +105,7 @@ const atuacao = [
               empresas e dos profissionais.
             </p>
           </article>
-          <article class="cartao cartao-rio">
+          <article class="cartao cartao-rio reveal" style="--i:4">
             <h3>Visão</h3>
             <p>
               Ser referência nos Campos Gerais em consultoria e gestão ambiental, reconhecida pela
@@ -121,15 +121,15 @@ const atuacao = [
   <!-- ===================== EMPRESAS ===================== -->
   <section id="empresas" class="empresas" aria-labelledby="titulo-empresas">
     <div class="container">
-      <p class="eyebrow">Empresas Associadas</p>
-      <h2 id="titulo-empresas" class="section-title">Quem faz parte</h2>
-      <p class="empresas-nota">
+      <p class="eyebrow reveal" style="--i:0">Empresas Associadas</p>
+      <h2 id="titulo-empresas" class="section-title reveal" style="--i:1">Quem faz parte</h2>
+      <p class="empresas-nota reveal" style="--i:2">
         Cada nome abre o portfólio da empresa em PDF, em uma nova aba.
       </p>
       <ol class="lista-empresas">
         {
           empresas.map((empresa, i) => (
-            <li>
+            <li class="reveal reveal-x" style={`--i:${i + 3}`}>
               <a
                 class="empresa"
                 href={empresa.data.portfolio}
@@ -154,12 +154,12 @@ const atuacao = [
   <!-- ===================== ATUAÇÃO ===================== -->
   <section id="atuacao" class="atuacao" aria-labelledby="titulo-atuacao">
     <div class="container">
-      <p class="eyebrow">Atuação e objetivos</p>
-      <h2 id="titulo-atuacao" class="section-title">O que a Associação oferece aos associados</h2>
+      <p class="eyebrow reveal" style="--i:0">Atuação e objetivos</p>
+      <h2 id="titulo-atuacao" class="section-title reveal" style="--i:1">O que a Associação oferece aos associados</h2>
       <ul class="lista-atuacao">
         {
-          atuacao.map((item) => (
-            <li>
+          atuacao.map((item, i) => (
+            <li class="reveal" style={`--i:${i + 2}`}>
               <h3>{item.titulo}</h3>
               <p>{item.texto}</p>
             </li>
@@ -172,15 +172,15 @@ const atuacao = [
   <!-- ===================== EVENTOS ===================== -->
   <section id="eventos" aria-labelledby="titulo-eventos">
     <div class="container">
-      <p class="eyebrow">Eventos</p>
-      <h2 id="titulo-eventos" class="section-title">Agenda e memórias da Associação</h2>
+      <p class="eyebrow reveal" style="--i:0">Eventos</p>
+      <h2 id="titulo-eventos" class="section-title reveal" style="--i:1">Agenda e memórias da Associação</h2>
       {
         eventos.length === 0 ? (
           <p>Em breve divulgaremos nossos próximos eventos.</p>
         ) : (
           <ul class="grade-eventos">
-            {eventos.map((evento) => (
-              <li>
+            {eventos.map((evento, i) => (
+              <li class="reveal" style={`--i:${i + 2}`}>
                 <a class="evento-cartao" href={`/eventos/${evento.id}/`}>
                   <div class="evento-foto">
                     {evento.data.fotos.length > 0 ? (
@@ -214,16 +214,16 @@ const atuacao = [
   <!-- ===================== CONTATO ===================== -->
   <section id="contato" class="contato" aria-labelledby="titulo-contato">
     <div class="container">
-      <p class="eyebrow eyebrow-claro">Contato</p>
-      <h2 id="titulo-contato" class="section-title">Vamos conversar?</h2>
-      <p class="contato-texto">
+      <p class="eyebrow eyebrow-claro reveal" style="--i:0">Contato</p>
+      <h2 id="titulo-contato" class="section-title reveal" style="--i:1">Vamos conversar?</h2>
+      <p class="contato-texto reveal" style="--i:2">
         Quer associar sua empresa, propor uma parceria ou saber mais sobre a Associação?
         Escreva para a gente:
       </p>
-      <a class="contato-email" href="mailto:associacaodosconsultorespg@gmail.com">
+      <a class="contato-email reveal" style="--i:3" href="mailto:associacaodosconsultorespg@gmail.com">
         associacaodosconsultorespg@gmail.com
       </a>
-      <p class="contato-local">Ponta Grossa – PR · na sede da ACIPG</p>
+      <p class="contato-local reveal" style="--i:4">Ponta Grossa – PR · na sede da ACIPG</p>
     </div>
   </section>
 </Base>

@@ -98,6 +98,61 @@ a:hover {
   padding-inline: var(--gutter);
 }
 
+/* ============================================================
+   Revelação no scroll
+   Curva de saída suave (sem "quique"), leve subida.
+   O atraso em cascata vem da variável --i definida no markup.
+   ============================================================ */
+:root {
+  --ease-saida: cubic-bezier(0.16, 1, 0.3, 1);
+  --reveal-dur: 0.8s;
+  --reveal-step: 80ms;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translate3d(0, 24px, 0);
+  transition:
+    opacity var(--reveal-dur) var(--ease-saida),
+    transform var(--reveal-dur) var(--ease-saida);
+  transition-delay: calc(var(--i, 0) * var(--reveal-step));
+  will-change: opacity, transform;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+/* Variante lateral — usada nas linhas das empresas */
+.reveal-x {
+  transform: translate3d(-18px, 0, 0);
+}
+
+/* Variante discreta para blocos grandes de texto */
+.reveal-soft {
+  transform: translate3d(0, 12px, 0);
+}
+
+/* Depois da animação, libera a composição da GPU */
+.reveal.is-done {
+  will-change: auto;
+}
+
+/* Sem animação para quem pediu menos movimento, e sem JS */
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+html.sem-js .reveal {
+  opacity: 1;
+  transform: none;
+}
+
 .skip-link {
   position: absolute;
   left: -9999px;

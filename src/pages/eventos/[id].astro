@@ -34,20 +34,20 @@ const fotosGrandes = await Promise.all(
         <a href="/#eventos">← Todos os eventos</a>
       </nav>
       <header>
-        <time datetime={evento.data.data.toISOString().slice(0, 10)}>{dataFormatada}</time>
-        <h1>{evento.data.titulo}</h1>
+        <time class="reveal" style="--i:0" datetime={evento.data.data.toISOString().slice(0, 10)}>{dataFormatada}</time>
+        <h1 class="reveal" style="--i:1">{evento.data.titulo}</h1>
       </header>
-      <div class="corpo">
+      <div class="corpo reveal reveal-soft" style="--i:2">
         <Content />
       </div>
 
       {
         evento.data.fotos.length > 0 && (
           <section class="galeria" aria-label="Galeria de fotos do evento">
-            <h2>Fotos</h2>
+            <h2 class="reveal">Fotos</h2>
             <ul>
               {evento.data.fotos.map((foto, i) => (
-                <li>
+                <li class="reveal" style={`--i:${i + 1}`}>
                   <button
                     type="button"
                     class="abrir-foto"

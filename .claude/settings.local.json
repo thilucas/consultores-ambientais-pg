@@ -31,7 +31,9 @@
       "Bash(curl -s -o /dev/null -w \"admin: HTTP %{http_code}\\\\n\" http://localhost:4321/admin/)",
       "PowerShell(netlify status *)",
       "PowerShell(netlify init *)",
-      "Bash(node -e ' *)"
+      "Bash(node -e ' *)",
+      "Bash(curl -s -o /dev/null -w \"home %{http_code} | \" https://consultores-ambientais-pg.netlify.app/)",
+      "Bash(curl -s -o /dev/null -w \"admin %{http_code}\\\\n\" https://consultores-ambientais-pg.netlify.app/admin/)"
     ]
   }
 }

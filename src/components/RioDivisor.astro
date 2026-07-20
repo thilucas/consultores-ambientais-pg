@@ -3,7 +3,7 @@
 // de uma araucária em line-art — o símbolo dos Campos Gerais.
 ---
 
-<div class="rio-divisor" aria-hidden="true">
+<div class="rio-divisor reveal" aria-hidden="true">
   <svg viewBox="0 0 1200 170" preserveAspectRatio="xMidYMax meet" role="presentation">
     <!-- rio -->
     <path
@@ -43,6 +43,13 @@
     margin-block: -1rem;
   }
 
+  /* O container usa .reveal só como gatilho do observador:
+     ele não deve desaparecer, quem anima são os traços do SVG. */
+  .rio-divisor.reveal {
+    opacity: 1;
+    transform: none;
+  }
+
   svg {
     width: 100%;
     height: auto;
@@ -60,12 +67,17 @@
     stroke-width: 26;
   }
 
+  /* O rio "corre" e a araucária se desenha quando o divisor entra na tela */
   .rio-escuro {
     stroke: var(--rio-600);
     stroke-width: 7;
     stroke-dasharray: 2400;
     stroke-dashoffset: 2400;
-    animation: correr 2.4s ease-out forwards;
+    transition: stroke-dashoffset 2.4s ease-out;
+  }
+
+  .rio-divisor.is-visible .rio-escuro {
+    stroke-dashoffset: 0;
   }
 
   .araucaria path {
@@ -73,18 +85,27 @@
     stroke: var(--verde-700);
     stroke-width: 3.5;
     stroke-linecap: round;
+    opacity: 0;
+    transform: translateY(10px);
+    transition:
+      opacity 0.9s ease-out 0.5s,
+      transform 0.9s var(--ease-saida) 0.5s;
   }
 
-  @keyframes correr {
-    to {
-      stroke-dashoffset: 0;
-    }
+  .rio-divisor.is-visible .araucaria path {
+    opacity: 1;
+    transform: translateY(0);
   }
 
   @media (prefers-reduced-motion: reduce) {
     .rio-escuro {
-      animation: none;
+      transition: none;
       stroke-dashoffset: 0;
+    }
+    .araucaria path {
+      transition: none;
+      opacity: 1;
+      transform: none;
     }
   }
 </style>
