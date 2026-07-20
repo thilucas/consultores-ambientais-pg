@@ -1,0 +1,90 @@
+---
+// Divisor decorativo: o rio sinuoso do logotipo em azul e a silhueta
+// de uma araucária em line-art — o símbolo dos Campos Gerais.
+---
+
+<div class="rio-divisor" aria-hidden="true">
+  <svg viewBox="0 0 1200 170" preserveAspectRatio="xMidYMax meet" role="presentation">
+    <!-- rio -->
+    <path
+      class="rio rio-claro"
+      d="M-20 118 C 120 60, 240 168, 400 112 S 660 52, 820 112 S 1080 168, 1220 96"
+    ></path>
+    <path
+      class="rio rio-escuro"
+      d="M-20 128 C 120 70, 240 178, 400 122 S 660 62, 820 122 S 1080 178, 1220 106"
+    ></path>
+    <!-- araucária -->
+    <g class="araucaria">
+      <path d="M965 158 L965 34"></path>
+      <path d="M965 44 C 958 30, 952 22, 942 14"></path>
+      <path d="M965 44 C 972 30, 978 22, 988 14"></path>
+      <path d="M965 34 L965 8"></path>
+      <path d="M965 64 C 944 60, 922 46, 914 26"></path>
+      <path d="M965 64 C 986 60, 1008 46, 1016 26"></path>
+      <path d="M965 90 C 936 87, 902 72, 888 46"></path>
+      <path d="M965 90 C 994 87, 1028 72, 1042 46"></path>
+      <path d="M965 118 C 930 116, 890 102, 870 74"></path>
+      <path d="M965 118 C 1000 116, 1040 102, 1060 74"></path>
+      <!-- grimpas (tufos) -->
+      <path d="M942 14 l -8 -4 M942 14 l -2 -9 M988 14 l 8 -4 M988 14 l 2 -9"></path>
+      <path d="M914 26 l -9 -2 M914 26 l -4 -8 M1016 26 l 9 -2 M1016 26 l 4 -8"></path>
+      <path d="M888 46 l -9 0 M888 46 l -5 -8 M1042 46 l 9 0 M1042 46 l 5 -8"></path>
+      <path d="M870 74 l -9 1 M870 74 l -6 -7 M1060 74 l 9 1 M1060 74 l 6 -7"></path>
+      <path d="M965 8 l -6 -5 M965 8 l 6 -5"></path>
+    </g>
+  </svg>
+</div>
+
+<style>
+  .rio-divisor {
+    overflow: hidden;
+    line-height: 0;
+    margin-block: -1rem;
+  }
+
+  svg {
+    width: 100%;
+    height: auto;
+    min-height: 90px;
+    display: block;
+  }
+
+  .rio {
+    fill: none;
+    stroke-linecap: round;
+  }
+
+  .rio-claro {
+    stroke: var(--rio-200);
+    stroke-width: 26;
+  }
+
+  .rio-escuro {
+    stroke: var(--rio-600);
+    stroke-width: 7;
+    stroke-dasharray: 2400;
+    stroke-dashoffset: 2400;
+    animation: correr 2.4s ease-out forwards;
+  }
+
+  .araucaria path {
+    fill: none;
+    stroke: var(--verde-700);
+    stroke-width: 3.5;
+    stroke-linecap: round;
+  }
+
+  @keyframes correr {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .rio-escuro {
+      animation: none;
+      stroke-dashoffset: 0;
+    }
+  }
+</style>

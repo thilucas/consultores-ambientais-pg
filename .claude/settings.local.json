@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(py --version)",
+      "Bash(where node *)",
+      "Bash(npm --version)",
+      "Bash(npm install *)",
+      "Bash(node extract.js)",
+      "Bash(npm run *)",
+      "Bash(curl -s -o /dev/null -w \"home: %{http_code}\\\\n\" http://localhost:4321/)",
+      "Bash(curl -s -o /dev/null -w \"evento: %{http_code}\\\\n\" http://localhost:4321/eventos/2025-12-10-fundacao-da-associacao/)",
+      "Bash(curl -s -o /dev/null -w \"admin: %{http_code}\\\\n\" http://localhost:4321/admin/)",
+      "Bash(curl -s -o /dev/null -w \"pdf: %{http_code}\\\\n\" http://localhost:4321/portfolios/orbienge.pdf)",
+      "Bash(curl -s http://localhost:4321/)",
+      "Bash(gh --version)",
+      "Bash(gh auth *)",
+      "Bash(netlify --version)",
+      "Bash(npx --yes netlify-cli --version)",
+      "Bash(netlify status *)",
+      "Bash(npx --yes netlify-cli status)",
+      "Bash(git init *)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)"
+    ]
+  }
+}

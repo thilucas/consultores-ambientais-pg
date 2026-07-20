@@ -1,0 +1,182 @@
+---
+import '@fontsource-variable/fraunces';
+import '@fontsource-variable/manrope';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  ogImage?: string;
+}
+
+const { title, description, ogImage = '/logo.png' } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={new URL(ogImage, Astro.site)} />
+    <meta property="og:site_name" content="Associação dos Consultores Ambientais de Ponta Grossa" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="generator" content={Astro.generator} />
+  </head>
+  <body>
+    <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a href="/" class="brand" aria-label="Página inicial — Associação dos Consultores Ambientais de Ponta Grossa">
+          <img src="/logo.png" alt="" width="44" height="44" />
+          <span class="brand-name">Consultores Ambientais<em>Ponta Grossa</em></span>
+        </a>
+        <nav aria-label="Navegação principal">
+          <ul class="nav-list">
+            <li><a href="/#sobre">Sobre</a></li>
+            <li><a href="/#empresas">Empresas</a></li>
+            <li><a href="/#atuacao">Atuação</a></li>
+            <li><a href="/#eventos">Eventos</a></li>
+            <li><a href="/#contato">Contato</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="conteudo">
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <div>
+          <p class="footer-name">Associação dos Consultores Ambientais de Ponta Grossa</p>
+          <p class="footer-tagline">Empresas conectadas, ambiente preservado, Ponta Grossa protegida.</p>
+        </div>
+        <div class="footer-meta">
+          <p><a href="mailto:associacaodosconsultorespg@gmail.com">associacaodosconsultorespg@gmail.com</a></p>
+          <p>Ponta Grossa – PR · vinculada à ACIPG</p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: color-mix(in srgb, var(--paper) 92%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--paper-2);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    padding-block: 0.75rem;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    text-decoration: none;
+    color: var(--verde-900);
+  }
+
+  .brand img {
+    border-radius: 50%;
+  }
+
+  .brand-name {
+    display: flex;
+    flex-direction: column;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1rem;
+    line-height: 1.15;
+  }
+
+  .brand-name em {
+    font-style: normal;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--verde-500);
+  }
+
+  .nav-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1.4rem;
+    list-style: none;
+  }
+
+  .nav-list a {
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--verde-900);
+  }
+
+  .nav-list a:hover {
+    color: var(--rio-600);
+  }
+
+  .site-footer {
+    background: var(--verde-950);
+    color: var(--paper);
+    padding-block: 3rem;
+  }
+
+  .footer-inner {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+
+  .footer-name {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    max-width: 26rem;
+  }
+
+  .footer-tagline {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--verde-300);
+  }
+
+  .footer-meta {
+    font-size: 0.9rem;
+    text-align: right;
+  }
+
+  .footer-meta a {
+    color: var(--rio-400);
+  }
+
+  @media (max-width: 640px) {
+    .footer-meta {
+      text-align: left;
+    }
+  }
+</style>

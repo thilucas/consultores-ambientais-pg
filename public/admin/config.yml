@@ -1,0 +1,73 @@
+backend:
+  name: git-gateway
+  branch: main
+  commit_messages:
+    create: 'Novo conteúdo: {{collection}} "{{slug}}"'
+    update: 'Atualização: {{collection}} "{{slug}}"'
+    delete: 'Exclusão: {{collection}} "{{slug}}"'
+    uploadMedia: 'Upload de mídia: {{path}}'
+    deleteMedia: 'Exclusão de mídia: {{path}}'
+
+locale: pt
+
+site_url: https://consultores-ambientais-pg.netlify.app
+logo_url: https://consultores-ambientais-pg.netlify.app/logo.png
+
+# Fotos enviadas pelo painel ficam em src/assets/uploads e são
+# otimizadas automaticamente durante o build do site.
+media_folder: 'src/assets/uploads'
+public_folder: '../../assets/uploads'
+
+collections:
+  - name: eventos
+    label: Eventos
+    label_singular: Evento
+    folder: src/content/eventos
+    create: true
+    delete: true
+    slug: '{{year}}-{{month}}-{{day}}-{{slug}}'
+    sortable_fields: [data, titulo]
+    summary: '{{titulo}} — {{data | date("DD/MM/YYYY")}}'
+    fields:
+      - { label: 'Título', name: titulo, widget: string, hint: 'Nome do evento. Ex.: Palestra sobre licenciamento ambiental' }
+      - {
+          label: 'Data',
+          name: data,
+          widget: datetime,
+          format: 'YYYY-MM-DD',
+          date_format: 'DD/MM/YYYY',
+          time_format: false,
+          hint: 'Data em que o evento aconteceu ou vai acontecer',
+        }
+      - { label: 'Descrição', name: body, widget: markdown, hint: 'Texto sobre o evento. Use os botões para negrito, listas etc.' }
+      - label: 'Fotos'
+        name: fotos
+        widget: list
+        required: false
+        summary: 'Foto'
+        hint: 'Clique em "Adicionar fotos" para enviar uma ou mais imagens do evento'
+        field: { label: 'Foto', name: foto, widget: image }
+
+  - name: empresas
+    label: Empresas Associadas
+    label_singular: Empresa
+    folder: src/content/empresas
+    create: true
+    delete: true
+    slug: '{{slug}}'
+    sortable_fields: [ordem, nome]
+    summary: '{{nome}}'
+    fields:
+      - { label: 'Nome', name: nome, widget: string, hint: 'Nome completo da empresa como deve aparecer no site' }
+      - { label: 'Descrição curta', name: descricao, widget: text, required: false, hint: 'Uma frase sobre a empresa (opcional)' }
+      - { label: 'Site', name: site, widget: string, required: false, hint: 'Endereço do site da empresa, começando com https:// (opcional)' }
+      - {
+          label: 'Portfólio (PDF)',
+          name: portfolio,
+          widget: file,
+          media_folder: '/public/portfolios',
+          public_folder: '/portfolios',
+          hint: 'Envie o portfólio da empresa em PDF',
+        }
+      - { label: 'Ordem na lista', name: ordem, widget: number, value_type: int, default: 0, required: false, hint: 'Número usado para ordenar a lista (1 aparece primeiro)' }
+      - { label: 'Observações internas', name: body, widget: markdown, required: false, hint: 'Não aparece no site (opcional)' }
