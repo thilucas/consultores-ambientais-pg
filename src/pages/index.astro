@@ -123,13 +123,10 @@ const atuacao = [
     <div class="container">
       <p class="eyebrow reveal" style="--i:0">Empresas Associadas</p>
       <h2 id="titulo-empresas" class="section-title reveal" style="--i:1">Quem faz parte</h2>
-      <p class="empresas-nota reveal" style="--i:2">
-        Cada nome abre o portfólio da empresa em PDF, em uma nova aba.
-      </p>
       <ol class="lista-empresas">
         {
           empresas.map((empresa, i) => (
-            <li class="reveal reveal-x" style={`--i:${i + 3}`}>
+            <li class="reveal reveal-x" style={`--i:${i + 2}`}>
               <a
                 class="empresa"
                 href={empresa.data.portfolio}
@@ -384,10 +381,8 @@ const atuacao = [
     color: var(--paper);
   }
 
-  .empresas-nota {
-    color: var(--verde-300);
+  .empresas #titulo-empresas {
     margin-bottom: 2.5rem;
-    font-size: 0.95rem;
   }
 
   .lista-empresas {
