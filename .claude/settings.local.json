@@ -26,7 +26,12 @@
       "Bash(git ls-remote *)",
       "Bash(echo \"rc=$?\")",
       "PowerShell(Get-Process *)",
-      "Bash(git commit -q -m ' *)"
+      "Bash(git commit -q -m ' *)",
+      "Bash(curl -s -o /dev/null -w \"preview local: HTTP %{http_code}\\\\n\" http://localhost:4321/)",
+      "Bash(curl -s -o /dev/null -w \"admin: HTTP %{http_code}\\\\n\" http://localhost:4321/admin/)",
+      "PowerShell(netlify status *)",
+      "PowerShell(netlify init *)",
+      "Bash(node -e ' *)"
     ]
   }
 }

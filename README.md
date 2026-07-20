@@ -34,42 +34,48 @@ public/
 As imagens passam pelo componente `<Image>` do Astro e são convertidas para
 WebP em tamanhos responsivos durante o build.
 
-## Configuração pendente na Netlify
+## Estado da configuração na Netlify
 
-O código está pronto. Faltam estes passos, que exigem login nas contas:
+O site está **no ar**: https://consultores-ambientais-pg.netlify.app
 
-### 1. Conectar o repositório
+| Item | Estado |
+| --- | --- |
+| Projeto na Netlify | ✅ criado (`consultores-ambientais-pg`) |
+| Deploy contínuo pelo GitHub | ✅ ativo — todo push na `main` republica |
+| Build (`npm run build` → `dist`) | ✅ configurado |
+| Netlify Identity | ✅ ativado |
+| Registro **apenas por convite** | ✅ ativado |
+| **Git Gateway** | ⚠️ **pendente** — ver abaixo |
+| Convite dos associados | ⚠️ pendente |
 
-1. Em https://app.netlify.com/start → **Import from GitHub**.
-2. Autorize a Netlify a acessar o GitHub (abre uma janela do GitHub).
-3. Selecione o repositório `consultores-ambientais-pg`.
-4. Build já vem preenchido pelo `netlify.toml`:
-   - Build command: `npm run build`
-   - Publish directory: `dist`
-5. **Deploy**.
+### Falta: ativar o Git Gateway
 
-### 2. Ativar o Netlify Identity (login dos associados)
+Sem esse passo o painel `/admin` abre e aceita login, mas **não consegue
+salvar** o conteúdo no repositório.
 
-Em **Project configuration → Identity**:
+1. Acesse **Project configuration → Identity → Services → Git Gateway**.
+2. Clique em **Enable Git Gateway**.
+3. Vai abrir uma **janela do GitHub** pedindo autorização para a Netlify —
+   confirme nela. É essa janela que trava a automação, por isso o passo é
+   manual.
+4. Ao terminar, o painel deve mostrar
+   `Repository: thilucas/consultores-ambientais-pg`.
 
-1. **Enable Identity**.
-2. **Registration preferences → Invite only** ← importante, senão qualquer
-   pessoa se cadastra.
-3. **Services → Git Gateway → Enable Git Gateway**. É isso que permite ao
-   painel gravar no repositório.
+> Se aparecer "This Git Gateway appears to be misconfigured", clique em
+> **Disable Git Gateway** e ative de novo — o aviso some quando a autorização
+> do GitHub é concluída.
 
-### 3. Convidar os associados
+### Depois: convidar os associados
 
 Em **Identity → Invite users**, informe os e-mails. Cada pessoa recebe um
-convite para criar a senha.
+convite para criar a senha (ver `GUIA-DO-ASSOCIADO.md`).
 
-### 4. Ajustar o domínio no código
+### Domínio
 
-Se o endereço final for diferente de
-`https://consultores-ambientais-pg.netlify.app`, atualize:
-
-- `astro.config.mjs` → campo `site`
-- `public/admin/config.yml` → `site_url` e `logo_url`
+O endereço de produção é `https://consultores-ambientais-pg.netlify.app`, já
+refletido em `astro.config.mjs` (`site`) e em `public/admin/config.yml`
+(`site_url`, `logo_url`). Se for configurado um domínio próprio, atualize os
+dois arquivos.
 
 ## Conteúdo a confirmar
 
