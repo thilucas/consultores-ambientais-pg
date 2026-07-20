@@ -20,7 +20,13 @@
       "Bash(npx --yes netlify-cli status)",
       "Bash(git init *)",
       "Bash(git add *)",
-      "Bash(git commit -m ' *)"
+      "Bash(git commit -m ' *)",
+      "Bash(git remote *)",
+      "Bash(git push *)",
+      "Bash(git ls-remote *)",
+      "Bash(echo \"rc=$?\")",
+      "PowerShell(Get-Process *)",
+      "Bash(git commit -q -m ' *)"
     ]
   }
 }
